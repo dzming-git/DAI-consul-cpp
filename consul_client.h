@@ -25,11 +25,23 @@ public:
     ConsulClient& setConsulPort(std::string);
 
     bool registerService(const ServerInfo& serverInfo);
-    bool deregisterService();
-    bool discoverServices(std::string serviceName, std::vector<std::pair<std::string, std::string>>& services);
+    // bool deregisterService();
+
+    struct TagRequirement;
+    bool discoverServices(std::string serviceName, std::vector<TagRequirement> tags, std::vector<ServerInfo>& services);
 private:
     std::string consulAddress;
     std::string consulPort;
+};
+
+struct ConsulClient::TagRequirement {
+    enum Requirement {
+        MUST,  // 每个服务都必有的
+        COMB,  // 不一定每个服务有，但可以通过服务进行组合
+        PRIOR  // 可以没有，优先
+    };
+    std::string tag;
+    Requirement requirement;
 };
 
 #endif /* _CONSUL_CLIENT_H_ */

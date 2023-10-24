@@ -22,9 +22,6 @@ public:
     ~ServerInfo();
     struct ServiceCheck;
 
-    ServerInfo& setConsulPort(std::string port);
-    std::string getConsulPort() const;
-
     ServerInfo& setServiceId(std::string id);
     std::string getServiceId() const;
 

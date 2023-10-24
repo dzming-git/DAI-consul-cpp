@@ -33,13 +33,13 @@ std::string ServerInfo::getServiceName() const {
     return serviceName;
 }
 
-ServerInfo& ServerInfo::setServiceAddress(std::string address) {
-    serviceAddress = address;
+ServerInfo& ServerInfo::setServiceIp(std::string address) {
+    serviceIp = address;
     return *this;
 }
 
-std::string ServerInfo::getServiceAddress() const {
-    return serviceAddress;
+std::string ServerInfo::getServiceIp() const {
+    return serviceIp;
 }
 
 ServerInfo & ServerInfo::setServicePort(uint16_t port) {

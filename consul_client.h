@@ -15,7 +15,7 @@
 
 #include <vector>
 #include <string>
-#include "consul/server_info.h"
+#include "consul/service_info.h"
 
 class ConsulClient {
 public:
@@ -24,11 +24,11 @@ public:
     ConsulClient& setConsulAddress(std::string);
     ConsulClient& setConsulPort(std::string);
 
-    bool registerService(const ServerInfo& serverInfo);
+    bool registerService(const ServiceInfo& serverInfo);
     // bool deregisterService();
 
     struct TagRequirement;
-    bool discoverServices(std::string serviceName, std::vector<ServerInfo>& services);
+    bool discoverServices(std::string serviceName, std::vector<ServiceInfo>& services);
 private:
     std::string consulAddress;
     std::string consulPort;

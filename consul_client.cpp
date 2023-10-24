@@ -29,7 +29,7 @@ ConsulClient& ConsulClient::setConsulPort(std::string port) {
     return *this;
 }
 
-bool ConsulClient::registerService(const ServerInfo& serverInfo) {
+bool ConsulClient::registerService(const ServiceInfo& serverInfo) {
     HttpRequest req;
     req.method = HTTP_PUT;
     req.url = "http://" + consulAddress + ":" + consulPort + "/v1/agent/service/register";
@@ -45,11 +45,11 @@ bool ConsulClient::registerService(const ServerInfo& serverInfo) {
     }
     jserviceInfo["Tags"] = jtags;
     nlohmann::json jserviceCheckInfo;
-    ServerInfo::ServiceCheck* check = serverInfo.getServiceCheck();
+    ServiceInfo::ServiceCheck* check = serverInfo.getServiceCheck();
     bool needDeleteCheckPtr = false;
     if (nullptr == check) {
         needDeleteCheckPtr = true;
-        check = new ServerInfo::ServiceCheck();
+        check = new ServiceInfo::ServiceCheck();
         check->url = serverInfo.getServiceIp() + ":" + serverInfo.getServicePort();
     }
     jserviceCheckInfo[check->protocol] = check->url;
@@ -68,7 +68,7 @@ bool ConsulClient::registerService(const ServerInfo& serverInfo) {
     return ret;
 }
 
-bool ConsulClient::discoverServices(std::string serviceName, std::vector<ServerInfo>& services) {
+bool ConsulClient::discoverServices(std::string serviceName, std::vector<ServiceInfo>& services) {
     HttpRequest req;
     req.method = HTTP_GET;
     req.url = "http://" + consulAddress + ":" + consulPort + "/v1/catalog/service/" + HUrl::escape(serviceName);
@@ -84,7 +84,7 @@ bool ConsulClient::discoverServices(std::string serviceName, std::vector<ServerI
     if (jroot.size() == 0) return true;
 
     for (size_t i = 0; i < jroot.size(); ++i) {
-        ServerInfo serverInfo;
+        ServiceInfo serverInfo;
         auto jservice = jroot[i];
         serverInfo.setServiceName(jservice["ServiceName"]);
         serverInfo.setServiceId(jservice["ServiceID"]);

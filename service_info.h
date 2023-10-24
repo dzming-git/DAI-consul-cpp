@@ -1,7 +1,7 @@
 /*****************************************************************************
 *  Copyright © 2023 - 2023 dzming.                                           *
 *                                                                            *
-*  @file     server_info.h                                                   *
+*  @file     service_info.h                                                  *
 *  @brief    Service information for registration or discovery               *
 *  @author   dzming                                                          *
 *  @email    dzm_work@163.com                                                *
@@ -10,35 +10,35 @@
 *  Remark  :                                                                 *
 *****************************************************************************/
 
-#ifndef _SERVER_INFO_H_
-#define _SERVER_INFO_H_
+#ifndef _SERVICE_INFO_H_
+#define _SERVICE_INFO_H_
 
 #include <vector>
 #include <string>
 
-class ServerInfo {
+class ServiceInfo {
 public:
-    ServerInfo();
-    ~ServerInfo();
+    ServiceInfo();
+    ~ServiceInfo();
     struct ServiceCheck;
 
-    ServerInfo& setServiceId(std::string id);
+    ServiceInfo& setServiceId(std::string id);
     std::string getServiceId() const;
 
-    ServerInfo& setServiceName(std::string name);
+    ServiceInfo& setServiceName(std::string name);
     std::string getServiceName() const;
 
-    ServerInfo& setServiceIp(std::string address);
+    ServiceInfo& setServiceIp(std::string address);
     std::string getServiceIp() const;
 
-    ServerInfo& setServicePort(uint16_t port);
-    ServerInfo& setServicePort(std::string port);
+    ServiceInfo& setServicePort(uint16_t port);
+    ServiceInfo& setServicePort(std::string port);
     std::string getServicePort() const;
 
-    ServerInfo& setServiceTags(std::vector<std::string> tags);
+    ServiceInfo& setServiceTags(std::vector<std::string> tags);
     std::vector<std::string> getServiceTags() const;
 
-    ServerInfo& setServiceCheck(ServiceCheck* check);
+    ServiceInfo& setServiceCheck(ServiceCheck* check);
     ServiceCheck* getServiceCheck() const;
 private:
     std::string serviceId;
@@ -49,7 +49,7 @@ private:
     ServiceCheck* serviceCheck;
 };
 
-struct ServerInfo::ServiceCheck {
+struct ServiceInfo::ServiceCheck {
     ServiceCheck();
 
     std::string protocol;
@@ -59,4 +59,4 @@ struct ServerInfo::ServiceCheck {
     int timeoutMs;
 };
 
-#endif /* _SERVER_INFO_H_ */
+#endif /* _SERVICE_INFO_H_ */

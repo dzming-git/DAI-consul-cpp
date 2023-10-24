@@ -67,7 +67,7 @@ bool ConsulClient::registerService(const ServerInfo& serverInfo) {
     return ret;
 }
 
-bool ConsulClient::discoverServices(std::string serviceName, std::vector<TagRequirement> tags, std::vector<ServerInfo>& services) {
+bool ConsulClient::discoverServices(std::string serviceName, std::vector<ServerInfo>& services) {
     HttpRequest req;
     req.method = HTTP_GET;
     req.url = "http://" + consulAddress + ":" + consulPort + "/v1/catalog/service/" + HUrl::escape(serviceName);
@@ -104,6 +104,5 @@ bool ConsulClient::discoverServices(std::string serviceName, std::vector<TagRequ
         serverInfo.setServicePort(static_cast<uint16_t>(jservice["ServicePort"]));
         services.emplace_back(serverInfo);
     }
-    // TODO: 没有添加tags的判断
     return true;
 }

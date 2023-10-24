@@ -28,7 +28,7 @@ public:
     // bool deregisterService();
 
     struct TagRequirement;
-    bool discoverServices(std::string serviceName, std::vector<TagRequirement> tags, std::vector<ServerInfo>& services);
+    bool discoverServices(std::string serviceName, std::vector<ServerInfo>& services);
 private:
     std::string consulAddress;
     std::string consulPort;

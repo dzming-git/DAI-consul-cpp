@@ -15,6 +15,10 @@ ConsulClient::ConsulClient(): consulPort("8500") {
     }
 }
 
+ConsulClient::TagRequirement::TagRequirement(std::string tag, Requirement requirement):
+tag(tag), requirement(requirement) {
+}
+
 ConsulClient& ConsulClient::setConsulAddress(std::string address) {
     consulAddress = address;
     return *this;

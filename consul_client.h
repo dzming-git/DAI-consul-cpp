@@ -40,6 +40,7 @@ struct ConsulClient::TagRequirement {
         COMB,  // 不一定每个服务有，但可以通过服务进行组合
         PRIOR  // 可以没有，优先
     };
+    TagRequirement(std::string, Requirement);
     std::string tag;
     Requirement requirement;
 };

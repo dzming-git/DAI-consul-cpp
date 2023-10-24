@@ -82,11 +82,10 @@ bool ConsulClient::discoverServices(std::string serviceName, std::vector<TagRequ
     if (!jroot.is_array()) return false;
     if (jroot.size() == 0) return true;
 
-    std::string name;
     for (size_t i = 0; i < jroot.size(); ++i) {
         ServerInfo serverInfo;
         auto jservice = jroot[i];
-        name = jservice["ServiceName"];
+        serverInfo.setServiceName(jservice["ServiceName"]);
         serverInfo.setServiceId(jservice["ServiceID"]);
         if (jservice.contains("ServiceAddress")) {
             serverInfo.setServiceAddress(jservice["ServiceAddress"]);

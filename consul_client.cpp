@@ -35,6 +35,7 @@ bool ConsulClient::registerService(const ServerInfo& serverInfo) {
     req.url = "http://" + consulAddress + ":" + consulPort + "/v1/agent/service/register";
     req.content_type = APPLICATION_JSON;
     nlohmann::json jserviceInfo;
+    jserviceInfo["ID"] = serverInfo.getServiceId();
     jserviceInfo["Name"] = serverInfo.getServiceName();
     jserviceInfo["Address"] = serverInfo.getServiceIp();
     jserviceInfo["Port"] = atoi(serverInfo.getServicePort().data());    

@@ -29,7 +29,7 @@ public:
 
     bool discoverServices(std::string serviceName, std::vector<ServiceInfo>& services);
 private:
-    std::string consulAddress;
+    std::string consulIp;
     std::string consulPort;
 };
 

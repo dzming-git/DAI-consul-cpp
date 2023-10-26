@@ -15,7 +15,7 @@ ConsulClient::ConsulClient(): consulPort("8500") {
     }
 }
 
-ConsulClient& ConsulClient::setConsulAddress(std::string address) {
+ConsulClient& ConsulClient::setConsulIp(std::string address) {
     consulAddress = address;
     return *this;
 }

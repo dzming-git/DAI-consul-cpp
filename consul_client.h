@@ -21,7 +21,7 @@ class ConsulClient {
 public:
     ConsulClient();
     // ~ConsulClient();
-    ConsulClient& setConsulAddress(std::string);
+    ConsulClient& setConsulIp(std::string);
     ConsulClient& setConsulPort(std::string);
 
     bool registerService(const ServiceInfo& serverInfo);

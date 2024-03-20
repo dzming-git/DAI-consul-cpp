@@ -4,7 +4,7 @@
 #include "hv/hurl.h"
 #include <string>
 
-ConsulClient::ConsulClient(): consulIp("127.0.0.1"), consulPort("8500") {
+ConsulClient::ConsulClient(): consulIp("127.0.0.1"), consulPort(8500) {
     
 }
 
@@ -13,7 +13,7 @@ ConsulClient& ConsulClient::setConsulIp(std::string ip) {
     return *this;
 }
 
-ConsulClient& ConsulClient::setConsulPort(std::string port) {
+ConsulClient& ConsulClient::setConsulPort(int port) {
     consulPort = port;
     return *this;
 }
@@ -21,7 +21,7 @@ ConsulClient& ConsulClient::setConsulPort(std::string port) {
 bool ConsulClient::registerService(const ServiceInfo& serverInfo) {
     HttpRequest req;
     req.method = HTTP_PUT;
-    req.url = "http://" + consulIp + ":" + consulPort + "/v1/agent/service/register";
+    req.url = "http://" + consulIp + ":" + std::to_string(consulPort) + "/v1/agent/service/register";
     req.content_type = APPLICATION_JSON;
     nlohmann::json jserviceInfo;
     jserviceInfo["ID"] = serverInfo.getServiceId();
@@ -60,7 +60,7 @@ bool ConsulClient::registerService(const ServiceInfo& serverInfo) {
 bool ConsulClient::discoverServices(std::string serviceName, std::vector<ServiceInfo>& services) {
     HttpRequest req;
     req.method = HTTP_GET;
-    req.url = "http://" + consulIp + ":" + consulPort + "/v1/catalog/service/" + HUrl::escape(serviceName);
+    req.url = "http://" + consulIp + ":" + std::to_string(consulPort) + "/v1/catalog/service/" + HUrl::escape(serviceName);
     std::cout << "GET" << std::endl << req.url << std::endl;
     HttpResponse res;
 

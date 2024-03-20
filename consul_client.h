@@ -22,7 +22,7 @@ public:
     ConsulClient();
     // ~ConsulClient();
     ConsulClient& setConsulIp(std::string);
-    ConsulClient& setConsulPort(std::string);
+    ConsulClient& setConsulPort(int);
 
     bool registerService(const ServiceInfo& serverInfo);
     // bool deregisterService();
@@ -30,7 +30,7 @@ public:
     bool discoverServices(std::string serviceName, std::vector<ServiceInfo>& services);
 private:
     std::string consulIp;
-    std::string consulPort;
+    int consulPort;
 };
 
 #endif /* _CONSUL_CLIENT_H_ */

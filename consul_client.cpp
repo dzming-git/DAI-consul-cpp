@@ -27,7 +27,7 @@ bool ConsulClient::registerService(const ServiceInfo& serverInfo) {
     jserviceInfo["ID"] = serverInfo.getServiceId();
     jserviceInfo["Name"] = serverInfo.getServiceName();
     jserviceInfo["Address"] = serverInfo.getServiceIp();
-    jserviceInfo["Port"] = atoi(serverInfo.getServicePort().data());    
+    jserviceInfo["Port"] = serverInfo.getServicePort();    
     nlohmann::json jtags = nlohmann::json::array();
     for (auto& tag : serverInfo.getServiceTags()) {
         jtags.push_back(tag);
@@ -39,7 +39,7 @@ bool ConsulClient::registerService(const ServiceInfo& serverInfo) {
     if (nullptr == check) {
         needDeleteCheckPtr = true;
         check = new ServiceInfo::ServiceCheck();
-        check->url = serverInfo.getServiceIp() + ":" + serverInfo.getServicePort();
+        check->url = serverInfo.getServiceIp() + ":" + std::to_string(serverInfo.getServicePort());
     }
     jserviceCheckInfo[check->protocol] = check->url;
     jserviceCheckInfo["Interval"] = std::to_string(check->intervalMs) + "ms";

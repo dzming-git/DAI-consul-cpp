@@ -42,17 +42,12 @@ std::string ServiceInfo::getServiceIp() const {
     return serviceIp;
 }
 
-ServiceInfo & ServiceInfo::setServicePort(uint16_t port) {
-    servicePort = std::to_string(port);
-    return *this;
-}
-
-ServiceInfo& ServiceInfo::setServicePort(std::string port) {
+ServiceInfo& ServiceInfo::setServicePort(int port) {
     servicePort = port;
     return *this;
 }
 
-std::string ServiceInfo::getServicePort() const {
+int ServiceInfo::getServicePort() const {
     return servicePort;
 }
 

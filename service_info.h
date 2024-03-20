@@ -31,9 +31,8 @@ public:
     ServiceInfo& setServiceIp(std::string address);
     std::string getServiceIp() const;
 
-    ServiceInfo& setServicePort(uint16_t port);
-    ServiceInfo& setServicePort(std::string port);
-    std::string getServicePort() const;
+    ServiceInfo& setServicePort(int port);
+    int getServicePort() const;
 
     ServiceInfo& setServiceTags(std::vector<std::string> tags);
     std::vector<std::string> getServiceTags() const;
@@ -44,7 +43,7 @@ private:
     std::string serviceId;
     std::string serviceName;
     std::string serviceIp;
-    std::string servicePort;
+    int servicePort;
     std::vector<std::string> serviceTags;
     ServiceCheck* serviceCheck;
 };
